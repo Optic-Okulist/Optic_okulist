@@ -15,7 +15,7 @@ import spring.boot.optic.okulist.dto.glasses.GlassesSearchParameter;
 import spring.boot.optic.okulist.exception.EntityNotFoundException;
 import spring.boot.optic.okulist.mapper.GlassesMapper;
 import spring.boot.optic.okulist.model.Glasses;
-import spring.boot.optic.okulist.repository.GlassesRepository;
+import spring.boot.optic.okulist.repository.glasses.GlassesRepository;
 import spring.boot.optic.okulist.specification.glasses.builders.GlassesSpecificationBuilder;
 
 @Service
@@ -75,7 +75,7 @@ public class GlassesServiceImpl implements GlassesService {
     }
 
     @Override
-    public List<GlassesResponseDto> searchGlassesByParameters(
+    public List<GlassesResponseDto> search(
             GlassesSearchParameter searchParameters) {
         Specification<Glasses> glassSpecification = glassesSpecificationBuilder
                 .build(searchParameters);

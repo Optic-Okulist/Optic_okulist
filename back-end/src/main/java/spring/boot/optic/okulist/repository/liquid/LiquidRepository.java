@@ -1,4 +1,4 @@
-package spring.boot.optic.okulist.repository;
+package spring.boot.optic.okulist.repository.liquid;
 
 import java.util.List;
 import org.springframework.data.jpa.domain.Specification;

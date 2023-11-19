@@ -5,6 +5,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,11 +45,18 @@ public class ManufacturerController {
     @PreAuthorize("hasRole('ADMIN')")
     public ManufacturerResponseDto createManufacturer(
             @RequestBody @Valid ManufacturerRequestDto manufacturerRequestDto) {
-        return null;
+        return manufacturerService.createManufacturer(manufacturerRequestDto);
     }
 
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public List<ManufacturerResponseDto> getAllManufacturers() {
-        return null;
+        return manufacturerService.getAllManufacturers();
+    }
+
+    @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
+    public ManufacturerResponseDto getManufacturerByName(@PathVariable String name) {
+        return manufacturerService.getManufacturerByName(name);
     }
 }

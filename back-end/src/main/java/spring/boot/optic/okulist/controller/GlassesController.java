@@ -72,8 +72,8 @@ public class GlassesController {
                     + "various search parameters such as color, manufacturer, or model."
     )
     @GetMapping("/search")
-    public List<GlassesResponseDto> searchBooks(GlassesSearchParameter searchParameters) {
-        return glassesService.searchGlassesByParameters(searchParameters);
+    public List<GlassesResponseDto> searchGlasses(GlassesSearchParameter searchParameters) {
+        return glassesService.search(searchParameters);
     }
 
     @Operation(summary = "Search for glasses",
@@ -83,7 +83,7 @@ public class GlassesController {
     public List<GlassesResponseDto> searchLiquidsWithSimiliarParams(
             GlassesSearchParameter searchParameters) {
         List<GlassesResponseDto> foundGlasses = glassesService
-                .searchGlassesByParameters(searchParameters);
+                .search(searchParameters);
         List<GlassesResponseDto> similarGlasses = glassesService
                 .findSimilar(searchParameters);
         Set<GlassesResponseDto> combinedSet = new HashSet<>(foundGlasses);
@@ -98,5 +98,12 @@ public class GlassesController {
     public void deleteGlasses(@PathVariable Long id) {
         logger.info("Deleting glasses with ID: " + id);
         glassesService.deleteById(id);
+    }
+
+    @GetMapping("/search")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @Operation(summary = "Search by parameters", description = "Searching by parameters")
+    public List<GlassesResponseDto> search(GlassesSearchParameter params) {
+        return glassesService.search(params);
     }
 }

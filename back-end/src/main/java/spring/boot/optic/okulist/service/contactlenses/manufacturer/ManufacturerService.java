@@ -12,4 +12,6 @@ public interface ManufacturerService {
     List<ManufacturerResponseDto> getAllManufacturers();
 
     void deleteManufacturer(Long manufacturerId);
+
+    ManufacturerResponseDto getManufacturerByName(String name);
 }

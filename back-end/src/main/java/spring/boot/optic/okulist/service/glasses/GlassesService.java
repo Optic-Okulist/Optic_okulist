@@ -17,7 +17,7 @@ public interface GlassesService {
 
     GlassesResponseDto update(Long id, GlassesRequestDto glassesRequestDto);
 
-    List<GlassesResponseDto> searchGlassesByParameters(GlassesSearchParameter searchParameters);
+    List<GlassesResponseDto> search(GlassesSearchParameter searchParameters);
 
     List<GlassesResponseDto> findSimilar(GlassesSearchParameter glassesRequestDto);
 }

@@ -21,8 +21,8 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     @Override
     public ManufacturerResponseDto createManufacturer(
             ManufacturerRequestDto manufacturerRequestDto) {
-
-        return null;
+        Manufacturer manufacturer = manufacturerMapper.toModel(manufacturerRequestDto);
+        return manufacturerMapper.toDto(manufacturerRepository.save(manufacturer));
     }
 
     @Override
@@ -51,4 +51,13 @@ public class ManufacturerServiceImpl implements ManufacturerService {
         manufacturer.setDeleted(true);
         manufacturerRepository.save(manufacturer);
     }
+
+    @Override
+    public ManufacturerResponseDto getManufacturerByName(String name) {
+        Manufacturer manufacturer = (Manufacturer) manufacturerRepository.findByName(name)
+                .orElseThrow(() ->
+                        new EntityNotFoundException("Manufacturer not found with name: " + name));
+        return manufacturerMapper.toDto(manufacturer);
+    }
+
 }
